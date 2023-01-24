@@ -1,23 +1,25 @@
 import unittest
-from main import *
+from src import *
 
 
 class PalindromeTest(unittest.TestCase):
     def test_renvoi_miroir(self):
         chaine = "toto"
 
-        # QUAND on saisit une chaîne
-        resultat = palindrome(chaine)
+        ohce = Ohce()
+        resultat = ohce.miroir(chaine)
 
-        # ALORS celle-ci est renvoyée en miroir
         self.assertIn(chaine[::-1], resultat)
 
     def test_palindrome(self):
-        chaine_palindrome = "radar"
+        palindrome = "radar"
 
-        resultat = palindrome(chaine_palindrome)
+        ohce = Ohce()
+        chaine_renvoye = ohce.miroir(palindrome)
+        self.assertIn(chaine_renvoye, palindrome)
 
-        self.assertIn("Bien dit !", resultat)
+        resultat_apres_palindrome = ohce.palindrome(palindrome)
+        self.assertIn(palindrome + "Bien dit !", resultat_apres_palindrome)
 
 
 if __name__ == '__main__':
