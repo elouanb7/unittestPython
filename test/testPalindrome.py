@@ -1,25 +1,32 @@
 import unittest
 from src import *
+from OhceBuilder import *
+from parameterized import *
 
 
 class PalindromeTest(unittest.TestCase):
     def test_renvoi_miroir(self):
         chaine = "toto"
 
-        ohce = Ohce()
+        ohce = OhceBuilder.default()
         resultat = ohce.miroir(chaine)
 
         self.assertIn(chaine[::-1], resultat)
 
-    def test_palindrome(self):
+    @parameterized.expand([
+        [LangueAnglaise(), "Well done"],
+        [LangueFrancaise(), "Bien dit !"],
+    ])
+    def test_palindrome(self, langue, bien_dit):
         palindrome = "radar"
 
-        ohce = Ohce()
-        chaine_renvoye = ohce.miroir(palindrome)
-        self.assertIn(chaine_renvoye, palindrome)
+        ohce = OhceBuilder().ayant_pour_langue(langue).build()
 
-        resultat_apres_palindrome = ohce.palindrome(palindrome)
-        self.assertIn(palindrome + "Bien dit !", resultat_apres_palindrome)
+        resultat = ohce.palindrome(palindrome)
+        self.assertIn(palindrome, resultat)
+
+        resultat_apres_palindrome = resultat[len(palindrome):len(resultat)]
+        self.assertIn(palindrome + bien_dit, resultat_apres_palindrome)
 
 
 if __name__ == '__main__':

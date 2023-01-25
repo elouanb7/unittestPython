@@ -1,21 +1,27 @@
 import unittest
 from src import *
-
+from OhceBuilder import *
+from parameterized import *
 
 class SalutationTest(unittest.TestCase):
-    def test_bonjour(self):
-        chaine = "Bonjour !"
+    @parameterized.expand(
+        [
+            [LangueAnglaise(), "Hello"],
+            [LangueFrancaise(), "Bonjour"],
+        ])
+    def test_bonjour(self, langue, attendu):
+        ohce = OhceBuilder().ayant_pour_langue(langue).build()
+        resultat = ohce.palindrome("test")
 
-        ohce = Ohce()
-        resultat = ohce.bonjour()
+        self.assertEqual(attendu, resultat[0:len(attendu)])
 
-        self.assertEqual(chaine, resultat)
+    @parameterized.expand(
+        [
+            [LangueAnglaise(), "Goodbye"],
+            [LangueFrancaise(), "Au revoir"],
+        ])
+    def test_au_revoir(self, langue, attendu):
+        ohce = OhceBuilder().ayant_pour_langue(langue).build()
+        resultat = ohce.palindrome("test")
 
-
-    def test_au_revoir(self):
-        chaine = "Au revoir !"
-
-        ohce = Ohce()
-        resultat = ohce.au_revoir()
-
-        self.assertEqual(chaine, resultat)
+        self.assertEqual(attendu, resultat[-len(attendu):])
