@@ -6,8 +6,8 @@ from parameterized import *
 class SalutationTest(unittest.TestCase):
     @parameterized.expand(
         [
-            [LangueAnglaise(), "Hello"],
-            [LangueFrancaise(), "Bonjour"],
+            [LangueAnglaise(), Constantes.Anglais.HELLO],
+            [LangueFrancaise(), Constantes.Francais.BONJOUR],
         ])
     def test_bonjour(self, langue, attendu):
         ohce = OhceBuilder().ayant_pour_langue(langue).build()
@@ -17,8 +17,8 @@ class SalutationTest(unittest.TestCase):
 
     @parameterized.expand(
         [
-            [LangueAnglaise(), "Goodbye"],
-            [LangueFrancaise(), "Au revoir"],
+            [LangueAnglaise(), Constantes.Anglais.GOOD_BYE],
+            [LangueFrancaise(), Constantes.Francais.AU_REVOIR],
         ])
     def test_au_revoir(self, langue, attendu):
         ohce = OhceBuilder().ayant_pour_langue(langue).build()
