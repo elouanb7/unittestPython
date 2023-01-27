@@ -1,5 +1,4 @@
 import unittest
-from src import *
 from OhceBuilder import *
 from parameterized import *
 
