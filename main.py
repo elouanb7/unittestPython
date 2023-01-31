@@ -6,11 +6,14 @@ from src import *
 class LangueAdapter:
     def __init__(self):
         langue_systeme = locale.getlocale()
-        if langue_systeme == "en_GB":
-            self.__langue = langue_systeme
+        if langue_systeme[0] == "en_GB":
+            self.__langue = LangueAnglaise
         else:
-            self.__langue = "fr_FR"
+            self.__langue = LangueFrancaise
+
+    def get_langue(self):
+        return self.__langue
 
 
 if __name__ == '__main__':
-    ohce = Ohce(LangueAdapter())
+    ohce = Ohce(LangueAdapter().get_langue(), 0)
